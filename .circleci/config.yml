@@ -15,7 +15,7 @@ jobs:
           key: v1-deps-{{ checksum "package.json" }}-<< parameters.node-version >>
       - run:
           name: Install packages
-          command: sudo npm install --prefer-offline --no-audit --progress=false
+          command: npm install --prefer-offline --no-audit --progress=false
       - save_cache:
           key: v1-deps-{{ checksum "package.json" }}-<< parameters.node-version >>
           paths: 
