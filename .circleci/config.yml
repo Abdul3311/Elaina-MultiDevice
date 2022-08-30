@@ -15,7 +15,7 @@ jobs:
           key: v1-deps-{{ checksum "package.json" }}-<< parameters.node-version >>
       - run:
           name: Install packages
-          command: npm install --prefer-offline --no-audit --progress=false
+          command: sudo npm install --prefer-offline --no-audit --progress=false
       - save_cache:
           key: v1-deps-{{ checksum "package.json" }}-<< parameters.node-version >>
           paths: 
@@ -23,7 +23,7 @@ jobs:
             - package-lock.json 
       - run:
           name: Run test using nodejs << parameters.node-version >>
-          command: node test.js
+          command: node .
   push:
     docker:
       - image: cimg/base:2021.04
@@ -37,7 +37,7 @@ jobs:
           command: git clone --mirror https://github.com/ZansLord/Elaina-MultiDevice.git
       - run:
           name: Change directory & Remote mirror repo & Update repo &
-          command: cd games-wabot.git &&
+          command: cd Elaina-MultiDevice.git &&
                   git remote set-url --push origin https://github.com/ZansLord/Elaina-MultiDevice.git && 
                   git fetch -p origin &&
                   (git push --mirror || exit 0)
